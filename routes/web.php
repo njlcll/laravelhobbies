@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,12 @@ Route::get('/info', function () {
 Route::get('/start', function () {
     return view('starting');
 });
+
+// Route::get('/hobby/{name}/{age}', 'HobbyController@index');
+
+
+Route::resource( 'hobby',   'HobbyController');
+Route::resource( 'tag',   'TagController');
 
 Auth::routes();
 

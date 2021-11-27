@@ -6,6 +6,7 @@ use App\Models\Hobby;
 use App\Http\Requests\StoreHobbyRequest;
 use App\Http\Requests\UpdateHobbyRequest;
 
+
 class HobbyController extends Controller
 {
     /**
@@ -13,9 +14,17 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('auth')->except(['index', 'show']);
+        
+    }
+    
     public function index()
     {
-        $hobbies = Hobby::all();
+        // $hobbies = Hobby::all();
+     
+        $hobbies = Hobby::orderBy('created_at', 'DESC')->paginate(10);
         return view('hobby.index')->with(
             ['hobbies' => $hobbies]
         );
@@ -46,7 +55,8 @@ class HobbyController extends Controller
         $hobby = new Hobby(
             [
                 'name' => $request->name,
-                'description' => $request['description']
+                'description' => $request['description'],
+                'user' => auth()->id()
             ]
         );
         $hobby->save();

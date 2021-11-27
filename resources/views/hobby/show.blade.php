@@ -13,7 +13,7 @@ Hobbies
                     <b>{{$hobby->name}}</b>
                     <p>{{$hobby->description}}</p>
                     <div class="mt-2">
-                       <a href='/hobby' class="btn btm-sm btn-primary"><i class="fas fa-arrow-circle-up"></i>Back to Overview</a>
+                       <a href='{{ url()->previous() }}' class="btn btm-sm btn-primary"><i class="fas fa-arrow-circle-up"></i>Back to Overview</a>
                       
                     </div>
                 </div>

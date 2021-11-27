@@ -5,29 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hobby extends Model
+class Tag extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
     protected $fillable = [
         'name',
-        'description',
-        'user_id',
+        'style',
         
     ];
 
-    public function user() {
-        return $this->belongsTo('App\Models\User');
+    public function hobbies() {
+        return $this->belongsToMany('App\Models\Hobby');
     }
-
-    public function tags() {
-        return $this->belongsToManyff('App\Models\Tag');
-    }
-
-    
 }

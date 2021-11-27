@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class HobbyFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class HobbyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->realText(20),
-            'description' => $this->faker->realText(),
+            //
         ];
     }
 }

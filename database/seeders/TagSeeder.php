@@ -15,14 +15,14 @@ class TagSeeder extends Seeder
     public function run()
     {
         $tags = [
-            'Sports' => 'primary', // blue
-            'Relaxation' => 'secondary', // grey
-            'Fun' => 'warning', // yellow
-            'Nature' => 'success', // green
-            'Inspiration' => 'light', // white grey
-            'Friends' => 'info', // turquoise
-            'Love' => 'danger', // red
-            'Interest' => 'dark' // black-white
+            'Sports' => 'primary text-light', // blue
+            'Relaxation' => 'secondary text-light', // grey
+            'Fun' => 'warning text-light', // yellow
+            'Nature' => 'success text-light', // green
+            'Inspiration' => 'light text-dark', // white grey
+            'Friends' => 'info text-light', // turquoise
+            'Love' => 'danger text-light', // red
+            'Interest' => 'dark text-light' // black-white
         ];
 
         foreach ($tags as $key => $value) {

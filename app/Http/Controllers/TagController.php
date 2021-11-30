@@ -39,7 +39,7 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-   
+
         $request->validate([
             'name' => 'required|min:3',
             'style' => 'required|min:5'
@@ -77,7 +77,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-            return view('tag.edit')->with([
+        return view('tag.edit')->with([
             'tag' => $tag
         ]);
     }
@@ -119,7 +119,10 @@ class TagController extends Controller
         $tag->delete();
         return $this->index()->with(
             [
-                'message_success' => "The tag <b>" . $oldName. "</b> was deleted."
-            ]);
+                'message_success' => "The tag <b>" . $oldName . "</b> was deleted."
+            ]
+        );
     }
+
+    
 }

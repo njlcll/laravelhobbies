@@ -14,15 +14,18 @@ Hobbies
                         @foreach($tags as $tag)
 
                         <li class="list-group-item">
-                            <!-- <a href="/tag/{{$tag->id}}">{{$tag->name}}</a> -->
+                            <a href="/tag/{{$tag->id}}">{{$tag->name}}</a>
                             {{$tag->name}}
                             <a class='btn btn-small btn-light' href="/tag/{{$tag->id}}/edit"><i class="fas fa-edit"></i>Edit</a>
-                            <form class="float-right" style="display: inline" action="/tag/{{ $tag->id }}" method="post">
+                            <form class="float-right" style="display: inline" action="/tag/{{$tag->id}}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
+                                
                             </form>
-                        </li>
+                            <div class="float-right mx-2"><a href="/hobby/tag/{{ $tag->id }}">used {{$tag->hobbies->count()}} times</a> </div> 
+                           
+                        </li> 
                         @endforeach
                     </ul>
                     <div class="mt-2">

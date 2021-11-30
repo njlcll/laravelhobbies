@@ -4606,12 +4606,13 @@ readers do not read off random characters that represent icons */
   font-weight: 900; }
 
 @charset "UTF-8";
-body {
-  background-color: green !important;
-}
-
 li.nav-link.active {
   background: #ddd;
+}
+
+.tags a, a:hover, a:focus, a:active {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 /*!

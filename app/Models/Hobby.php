@@ -26,8 +26,14 @@ class Hobby extends Model
     }
 
     public function tags() {
-        return $this->belongsToManyff('App\Models\Tag');
+        return $this->belongsToMany('App\Models\Tag');
     }
+
+    // public function filteredTags() {
+    //     return $this->belongsToMany('App\Models\Tag')
+    //     ->wherePivot('hobby_id', $this->id)
+    //     ->orderBy('updated_at', 'DESC');
+    // }
 
     
 }

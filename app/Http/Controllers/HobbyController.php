@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hobby;
+use App\Models\Tag;
 use App\Http\Requests\StoreHobbyRequest;
 use App\Http\Requests\UpdateHobbyRequest;
-
-
+use Illuminate\Support\Facades\Session;
 class HobbyController extends Controller
 {
     /**
@@ -15,16 +15,16 @@ class HobbyController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth')->except(['index', 'show']);
-        
     }
-    
+
     public function index()
     {
         // $hobbies = Hobby::all();
-     
-        $hobbies = Hobby::orderBy('created_at', 'DESC')->paginate(10);
+
+        $hobbies = Hobby::orderBy('created_at', 'DESC')->paginate(20);
         return view('hobby.index')->with(
             ['hobbies' => $hobbies]
         );
@@ -56,13 +56,15 @@ class HobbyController extends Controller
             [
                 'name' => $request->name,
                 'description' => $request['description'],
-                'user' => auth()->id()
+                'user_id' => auth()->id()
             ]
         );
+
+     
         $hobby->save();
-        return $this->index()->with(
+        return redirect('/hobby/' . $hobby->id)->with(
             [
-                'message_success' => "The hobby <b>" . $hobby->name . "</b> was created."
+                'message_warning' => "Please assign some tags now."
             ]
         );
     }
@@ -75,8 +77,16 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
+     
+        $allTags = Tag::all();
+        $usedTags = $hobby->tags;
+        $availableTags = $allTags->diff($usedTags);
+
         return view('hobby.show')->with([
-            'hobby' => $hobby
+            'hobby' => $hobby,
+            'tags' =>$availableTags,
+            'message_success' => Session::get(''),
+            'message_warning' => "Please assign some tags now."
         ]);
     }
 
@@ -89,7 +99,8 @@ class HobbyController extends Controller
     public function edit(Hobby $hobby)
     {
         return view('hobby.edit')->with([
-            'hobby' => $hobby
+            'hobby' => $hobby,
+         
         ]);
     }
 
@@ -131,8 +142,12 @@ class HobbyController extends Controller
 
         return $this->index()->with(
             [
-                'message_success' => "The hobby <b>" .$oldName . "</b> was deleted."
+                'message_success' => "The hobby <b>" . $oldName . "</b> was deleted."
             ]
         );
     }
+
+   
+
+   
 }

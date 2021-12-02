@@ -1,76 +1,65 @@
 @extends('layouts.app')
-@section('title')
-Hobbies
-@endsection
+
 @section('content')
-<div class="container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <div class="card">
 
-    <div class="row justify-content-center">
-        <div class="col-md-11">
-            <div class="card">
-                <div class="card-header">
-                    <span class='float-right'>
-                        @isset($filter)
-                        <span class="badge bg-{{$filter->style}} ">
-                   
-                            Filter : {{$filter->name}}
-                  
-                    </span>
-
-                    <a class='btn btn-outline-secondary btn-sm mx-1' href="/hobby"></i>All Hobbies</a>
+                    @isset($filter)
+                        <div class="card-header">Filtered hobbies by
+                            <span style="font-size: 130%;" class="badge badge-{{ $filter->style }}">{{ $filter->name }}</span>
+                            <span class="float-right"><a href="/hobby">Show all Hobbies</a></span>
+                        </div>
                     @else
-                    All Hobbies
+                        <div class="card-header">All the hobbies</div>
                     @endisset
-                    </span>
-                </div>
 
-                <div class="card-body">
-                    <ul class="list-group">
-                        @foreach($hobbies as $hobby)
-                      
-     
-                        <li class="list-group-item">
-                            <div><a href="/hobby/{{$hobby->id}}"> {{$hobby->name}}</a></div>
-                            <div class="d-none d-sm-block">By <a href="user/{{$hobby->id}}">{{$hobby->name}}</a> Hobbies : {{ $hobby->user->hobbies->count() }}
-                      
-                                <br> {{$hobby->created_at->diffForHumans()}}
-                            </div>
-                            <div class="tags">
-                                @foreach ($hobby->tags as $tag)
-
-                                <span class="badge bg-{{$tag->style}} ">
-                                    <a href="/hobby/tag/{{$tag->id}}">
-                                        {{$tag->name}}
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach($hobbies as $hobby)
+                                <li class="list-group-item">
+                                @if(file_exists('img/hobbies/' . $hobby->id . '_thumb.jpg'))
+                                    <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                       
+                                       
+                                        <img src="/img/hobbies/{{ $hobby->id }}_thumb.jpg" alt="Hobby Thumb">
                                     </a>
-                                </span>
-                                @endforeach
-                            </div>
-                            @auth
-                            <a class='btn btn-outline-secondary btn-sm float-right mx-1' href="/hobby/{{$hobby->id}}/edit"><i class="fas fa-edit"></i>Edit</a>
-
-                            <form class="float-right mx-1" style="display: inline" action="/hobby/{{ $hobby->id }}" method="post">
-                                @csrf
-                                @method("DELETE")
-                                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
-                            </form>
-                            @endauth
-
-                        </li>
-                        @endforeach
-                    </ul>
-                    <div class="mt-3 links d-flex justify-content-center ">
-                        {{$hobbies->links()}}
+                                    @endif
+                                    &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+                                    @auth
+                                    <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Edit Hobby</a>
+                                    @endauth
+                                    <span class="mx-2">Posted by: <a href="/user/{{ $hobby->user->id }}">{{ $hobby->user->name }} ({{ $hobby->user->hobbies->count() }} Hobbies)</a>
+                                   
+                                    </span>
+                                    @auth
+                                    <form class="float-right" style="display: inline" action="/hobby/{{ $hobby->id }}" method="post">
+                                        @csrf
+                                        @method("DELETE")
+                                        <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
+                                    </form>
+                                    @endauth
+                                    <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
+                                    <br>
+                                    @foreach($hobby->tags as $tag)
+                                        <a href="/hobby/tag/{{ $tag->id }}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                    @endforeach
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                    @auth
-                    <div class="mt-2">
-                        <a href='/hobby/create' class="btn btn-sm btn-success"><i class="fas fa-plus-circle"></i>Add Hobby</a>
-
-                    </div>
-                    @endauth
-
                 </div>
+
+                <div class="mt-3">
+                    {{ $hobbies->links() }}
+                </div>
+                @auth
+                <div class="mt-2">
+                    <a class="btn btn-success btn-sm" href="/hobby/create"><i class="fas fa-plus-circle"></i> Create new Hobby</a>
+                </div>
+                @endauth
             </div>
         </div>
     </div>
-</div>
 @endsection

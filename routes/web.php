@@ -29,13 +29,20 @@ Route::get('/start', function () {
 
  Route::get('hobby/{hobbyId}/tag/{tagId}/attach','HobbyTagController@attachTag');
  Route::get('hobby/{hobbyId}/tag/{tagId}/detach','HobbyTagController@detachTag');
-
+ 
+ 
+ //delete images of hobby
+ Route::get('/delete-images/hobby/{hobby_id}', 'HobbyController@deleteImages');
 
 Route::resource( 'hobby',   'HobbyController');
 Route::resource( 'tag',   'TagController');
 Route::get('/hobby/tag/{tag_id}', [App\Http\Controllers\HobbyTagController::class, 'getFilteredHobbies'])->name('hobby_tag');
 
 Route::resource('user', 'UserController');
+// Delete Images of Hobby
+Route::get('/delete-images/hobby/{hobby_id}', 'HobbyController@deleteImages');
+// Delete Images of User
+Route::get('/delete-images/user/{user_id}', 'UserController@deleteImages');
 
 Auth::routes();
 

@@ -6,31 +6,44 @@ Home
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        
-        <div class="col-md-11">
-         
+
+        <div class="col-md-9">
+
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
                     <h2>{{auth()->user()->name}}</h2>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+
+                    <p>{{ auth()->user()->motto ?? '' }}</p>
+
+
+                    <p>{{ auth()->user()->about_me ?? '' }}</p>
+                    <p>
+                        <a class="btn btn-primary" href="user/{{ auth()->user()->id }}/edit">Edit my profile</a>
+                    </p>
+                    <!-- @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif -->
                     @isset($hobbies)
                     <h3>Your Hobbies</h3>
                     <ul class="list-group">
                         @foreach($hobbies as $hobby)
-                      
-     
                         <li class="list-group-item">
-                            <div><a href="/hobby/{{$hobby->id}}"> {{$hobby->name}}</a></div>
-                            <div class="d-none d-sm-block"> Hobbies : {{ $hobby->user->hobbies->count() }}
-                      
-                                <br> {{$hobby->created_at->diffForHumans()}}
-                            </div>
+                            
+                         
+                            </a>
+                            @if(file_exists('img/hobbies/' . $hobby->id . '_thumb.jpg'))
+                            <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                <img src="/img/hobbies/{{ $hobby->id }}_thumb.jpg" alt="Hobby Thumb">
+                            </a>
+                            @endif
+                            &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+                            @auth
+                            <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Edit Hobby</a>
+                            @endauth
                             <div class="tags">
                                 @foreach ($hobby->tags as $tag)
 
@@ -59,6 +72,14 @@ Home
                     <a class="btn btn-success btn-sm" href="/hobby/create"><i class="fas fa-plus-circle"></i> Create new Hobby</a>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-3">
+            @if(file_exists('img/users/' . auth()->user()->id .'_large.jpg'))
+            <img class="img-thumbnail" src="/img/users/{{ auth()->user()->id }}_large.jpg" alt="{{ auth()->user()->name }}">
+            @endif
+
+
         </div>
     </div>
 </div>

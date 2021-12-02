@@ -40,7 +40,9 @@
                             @endif
                         </div>
                         <div class="col-md-3">
-                            <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ $user->name }}">
+                        @if(file_exists('img/users/' .  $user->id.'_thumb.jpg'))
+                            <img class="img-thumbnail" src="/img/users/{{ $user->id }}_thumb.jpg" alt="{{ $user->name }}">
+                        @endif
                         </div>
                     </div>
 

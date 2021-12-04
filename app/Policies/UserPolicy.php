@@ -2,19 +2,23 @@
 
 namespace App\Policies;
 
-use App\Models\Hobby;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
-class HobbyPolicy
+
+class UserPolicy
 {
+
     use HandlesAuthorization;
+
 
     public function before($user, $ability) {
         if ($user->role === 'admin') {
             return true;
         }
     }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -23,17 +27,17 @@ class HobbyPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Hobby  $hobby
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Hobby $hobby)
+    public function view(User $user, User $model)
     {
         //
     }
@@ -53,34 +57,34 @@ class HobbyPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Hobby  $hobby
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Hobby $hobby)
+    public function update(User $user, User $model)
     {
-        return $user->id === $hobby->user_id;
+        return $user->id === $model->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Hobby  $hobby
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Hobby $hobby)
+    public function delete(User $user, User $model)
     {
-        return $user->id === $hobby->user_id;
+        return $user->id === $model->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Hobby  $hobby
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Hobby $hobby)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -89,10 +93,10 @@ class HobbyPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Hobby  $hobby
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Hobby $hobby)
+    public function forceDelete(User $user, User $model)
     {
         //
     }

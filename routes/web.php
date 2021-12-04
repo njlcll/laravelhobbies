@@ -27,8 +27,8 @@ Route::get('/start', function () {
 });
 
 
- Route::get('hobby/{hobbyId}/tag/{tagId}/attach','HobbyTagController@attachTag');
- Route::get('hobby/{hobbyId}/tag/{tagId}/detach','HobbyTagController@detachTag');
+ Route::get('hobby/{hobbyId}/tag/{tagId}/attach','HobbyTagController@attachTag')->middleware('auth');
+ Route::get('hobby/{hobbyId}/tag/{tagId}/detach','HobbyTagController@detachTag')->middleware('auth');
  
  
  //delete images of hobby

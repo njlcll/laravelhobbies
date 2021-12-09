@@ -27,9 +27,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,12 +39,12 @@
                     <ul class="navbar-nav mr-auto">
                  
                         @auth
-                            <li><a class="nav-link{{ Request::is('home') ? ' active' : '' }}" href="/home">Home</a></li>
+                            <li><a class="nav-link{{ Request::is('home') ? ' active' : '' }}" href="/">Home</a></li>
                         @endauth
 
-                        @guest
+                        <!-- @guest
                             <li><a class="nav-link{{ Request::is('/') ? ' active' : '' }}" href="/">Start</a></li>
-                        @endguest
+                        @endguest -->
                         <li><a class="nav-link{{ Request::is('info') ? ' active' : '' }}" href="/info">Info</a></li>
                         <li><a class="nav-link{{ Request::is('hobby*') ? ' active' : '' }}" href="/hobby">Hobbies</a></li>
                         <li><a class="nav-link{{ Request::is('tag*') ? ' active' : '' }}" href="/tag">Tags</a></li>

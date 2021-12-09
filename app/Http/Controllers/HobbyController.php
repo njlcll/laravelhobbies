@@ -140,11 +140,15 @@ class HobbyController extends Controller
             'description' => $request['description'],
         ]);
 
-        return $this->index()->with(
+        // return $this->index()->with(
+        //     [
+        //         'message_success' => "The hobby <b>" . $hobby->name . "</b> was updated."
+        //     ]
+        // );
+        return redirect('/hobby/' . $hobby->id)->with(
             [
-                'message_success' => "The hobby <b>" . $hobby->name . "</b> was updated."
-            ]
-        );
+                'message_warning' => "Please assign some tags now."
+            ]);
     }
 
     /**

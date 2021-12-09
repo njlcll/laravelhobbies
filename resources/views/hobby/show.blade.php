@@ -13,14 +13,22 @@
                             <b>{{$hobby->name}}</b>
                             <p>{{$hobby->description}}</p>
                             @if($hobby->tags->count() > 0)
+                            @auth
                             <b>Used Tags:</b> (Click to remove)
                             <p>
                                 @foreach($hobby->tags as $tag)
                                 <a href="/hobby/{{$hobby->id}}/tag/{{$tag->id}}/detach"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                 @endforeach
                             </p>
+                            @endauth
+                            @guest 
+                            @foreach($hobby->tags as $tag)
+                                <span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span>
+                                @endforeach
+                            @endguest
                             @endif
 
+                            @auth
                             @if($availableTags->count() > 0)
                             <b>Available Tags:</b> (Click to assign)
                             <p>
@@ -29,6 +37,11 @@
                                 @endforeach
                             </p>
                             @endif
+                            @endauth
+                            <div class="end-btn mt-3">
+                            <a class="btn btn-primary btn-sm" href="/hobby"><i class="fas fa-arrow-circle-up"></i> Hobbies</a>
+                            </div>
+                           
                         </div>
                         <div class="col-md-3">
                             @if(Auth::user() && file_exists('img/hobbies/' . $hobby->id . '_large.jpg'))

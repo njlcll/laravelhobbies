@@ -13,18 +13,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('starting');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', function () {
+    
+//     return view('home')->middleware('auth');
+// });
 
 Route::get('/info', function () {
     return view('info');
 });
 
-Route::get('/start', function () {
-    return view('starting');
-});
+// Route::get('/start', function () {
+//     return view('starting');
+// });
 
 
  Route::get('hobby/{hobbyId}/tag/{tagId}/attach','HobbyTagController@attachTag')->middleware('auth');
@@ -46,4 +47,4 @@ Route::get('/delete-images/user/{user_id}', 'UserController@deleteImages');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-About me
+Laravel Demo 
 @endsection
 
 @section('content')
@@ -10,16 +10,36 @@ About me
         <div class="col-md-8">
             <h4>Info</h4>
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Laravel Hobby Membership Demo</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                <h4> This is a demo site written in Laravel 8.</h4>
+                  <p>
+                    <ul class="list-group  list-group-flush">
+                        <li class="list-group-item">
+                            Laravel Blade Templating and U.I scaffolding
+                        </li>
+                        <li class="list-group-item">
+                            Laravel Blade Templating and U.I scaffolding
+                        </li>
+                        <li class="list-group-item">
+                            CRUD, Resourses and Models and Eloquent model relationships.
+                        </li>
+                        <li class="list-group-item">
+                            CRUD, Resourses and Models
+                        </li>
+                        <li class="list-group-item">
+                           Database migrations factories and seeders
+                        </li>
+                        <li class="list-group-item">
+                          Image Upload and manipulation using the Intervention  package
+                        </li>
+                        <li class="list-group-item">
+                          User auth useing middeware policies and gates
+                        </li>
+                    </ul> 
+                    </ul> 
+                  </p>
                 </div>
             </div>
         </div>
